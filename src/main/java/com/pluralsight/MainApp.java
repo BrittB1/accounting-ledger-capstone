@@ -2,14 +2,16 @@ package com.pluralsight;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Scanner;
 
 public class MainApp {
 
-    public static Scanner input = null;
+    public static Scanner keyboard = null;
 
     public static void main(String[] args) {
-        input = new Scanner(System.in);
+        keyboard = new Scanner(System.in);
         boolean running = true;
 
 
@@ -36,7 +38,7 @@ public class MainApp {
                                 X. Exit \
                 """);
 
-        String choice = input.nextLine().trim().toUpperCase();
+        String choice = keyboard.nextLine().trim().toUpperCase();
 
         switch (choice) {
 
@@ -83,7 +85,7 @@ public class MainApp {
                                     H. Home
                     """);
 
-            String selection = input.nextLine().trim().toUpperCase();
+            String selection = keyboard.nextLine().trim().toUpperCase();
 
             switch (selection) {
 
@@ -115,11 +117,58 @@ public class MainApp {
 
             }
         }
+    }
+
+    private static void addDeposit() {
+        System.out.println("ADD DEPOSIT");
+
+        System.out.print("Enter description: ");
+        String description = keyboard.nextLine();
+
+        System.out.print("Enter vendor: ");
+        String vendor = keyboard.nextLine();
+
+        System.out.print("Enter amount: ");
+        double amount = keyboard.nextDouble();
+        keyboard.nextLine();
+
+        LocalDate date = LocalDate.now();
+        LocalTime time = LocalTime.now();
+
+        Transaction transaction = new Transaction(amount, vendor, description, time, date);
+
+        saveTransaction(transaction);
+
+        System.out.println("Deposit Successful");
 
     }
+
+    private static void makePayment() {
+        System.out.println("MAKE PAYMENT");
+
+        System.out.println("Enter vendor: ");
+        String vendor = keyboard.nextLine();
+
+        System.out.println("Enter description: ");
+        String description = keyboard.nextLine();
+
+        System.out.println("Enter amount: ");
+        double amount = keyboard.nextDouble();
+        keyboard.nextLine();
+
+        LocalDate date = LocalDate.now();
+        LocalTime time = LocalTime.now();
+
+        Transaction transaction = new Transaction(-amount, vendor, description, time, date);
+
+        saveTransaction(transaction);
+
+        System.out.println("Payment successful");
+    }
+
     private static void saveTransaction(Transaction transaction) {
         try {
-            BufferedWriter bufWriter = new BufferedWriter(new FileWriter("transactions.csv",true));
+            BufferedWriter bufWriter = new BufferedWriter(new FileWriter("transactions.csv", true));
 
             bufWriter.write(transaction.toCSV());
 
@@ -129,8 +178,7 @@ public class MainApp {
 
 
         } catch (IOException e) {
-            System.out.println("Error saving transaction");
-
+            System.out.println("Error saving transaction" + e.getMessage());
         }
 
     }

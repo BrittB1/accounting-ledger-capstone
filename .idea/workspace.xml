@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="28795a2f-de1f-4820-bd35-004d756a9ce7" name="Changes" comment="Initial commit - created MainApp class + declared helper methods for Home and Ledger screens.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/pluralsight/Transaction.java" afterDir="false" />
+    <list default="true" id="28795a2f-de1f-4820-bd35-004d756a9ce7" name="Changes" comment="Created Transaction class w/ data members and getters. Added saveTransactions method to Main.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pluralsight/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pluralsight/MainApp.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,11 +71,20 @@
       <option name="project" value="LOCAL" />
       <updated>1760060314986</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Created Transaction class w/ data members and getters. Added saveTransactions method to Main.">
+      <option name="closed" value="true" />
+      <created>1760117428244</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1760117428244</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit - created MainApp class + declared helper methods for Home and Ledger screens." />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial commit - created MainApp class + declared helper methods for Home and Ledger screens." />
+    <MESSAGE value="Created Transaction class w/ data members and getters. Added saveTransactions method to Main." />
+    <option name="LAST_COMMIT_MESSAGE" value="Created Transaction class w/ data members and getters. Added saveTransactions method to Main." />
   </component>
 </project>
