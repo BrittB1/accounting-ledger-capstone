@@ -1,9 +1,9 @@
 package com.pluralsight;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+
+import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MainApp {
@@ -181,5 +181,24 @@ public class MainApp {
             System.out.println("Error saving transaction" + e.getMessage());
         }
 
+    }
+
+    private static ArrayList<Transaction> loadTransactions() {
+        ArrayList<Transaction> transactions = new ArrayList<>();
+        try {
+            BufferedReader bufReader = new BufferedReader(new FileReader("transactions.csv"));
+
+            String line;
+            while ((line = bufReader.readLine()) != null) {
+                Transaction transaction = Transaction.fromCSV(line);
+                transactions.add(transaction);
+            }
+            bufReader.close();
+
+        } catch (Exception e) {
+            System.out.println("Error loading transactions" + e.getMessage());
+        }
+
+        return transactions;
     }
 }
