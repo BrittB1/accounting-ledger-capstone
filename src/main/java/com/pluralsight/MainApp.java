@@ -1,5 +1,7 @@
 package com.pluralsight;
-
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class MainApp {
@@ -15,7 +17,7 @@ public class MainApp {
 
 
         while (running) {
-           running = showHomeScreen();
+            running = showHomeScreen();
         }
     }
 
@@ -68,18 +70,18 @@ public class MainApp {
         while (inLedger) {
 
             System.out.println("""
-                        
-                                        ==================================
-                                                  LEDGER MENU\s
-                                        ==================================
-                                        Choose an option by letter:
-                                       \s
-                                        A. All\s
-                                        D. Deposits
-                                        P. Payments
-                                        R. Reports \s
-                                        H. Home
-                        """);
+                    
+                                    ==================================
+                                              LEDGER MENU\s
+                                    ==================================
+                                    Choose an option by letter:
+                                   \s
+                                    A. All\s
+                                    D. Deposits
+                                    P. Payments
+                                    R. Reports \s
+                                    H. Home
+                    """);
 
             String selection = input.nextLine().trim().toUpperCase();
 
@@ -112,6 +114,23 @@ public class MainApp {
                     System.out.println("Sorry invalid option. Please try again");
 
             }
+        }
+
+    }
+    private static void saveTransaction(Transaction transaction) {
+        try {
+            BufferedWriter bufWriter = new BufferedWriter(new FileWriter("transactions.csv",true));
+
+            bufWriter.write(transaction.toCSV());
+
+            bufWriter.newLine();
+
+            bufWriter.close();
+
+
+        } catch (IOException e) {
+            System.out.println("Error saving transaction");
+
         }
 
     }
