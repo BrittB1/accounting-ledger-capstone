@@ -105,7 +105,6 @@ public class MainApp {
                     break;
 
                 case "R":
-                    //TODO Create sRS method
                     showReportsScreen();
                     break;
 
@@ -115,6 +114,51 @@ public class MainApp {
                 default:
                     System.out.println("Sorry invalid option. Please try again");
 
+            }
+        }
+    }
+    private static void showReportsScreen(){
+        boolean inReports = true;
+
+        while (inReports){
+
+            System.out.println("""
+                    
+                                    ==================================
+                                              REPORTS MENU\s
+                                    ==================================
+                                    Choose an option by letter:
+                                   \s
+                                    1). Month to Date\s
+                                    2). Previous Month
+                                    3). Year To Date
+                                    4). Previous Year\s
+                                    5). Search By Vendor
+                                    0). Back
+                    """);
+            String choice = keyboard.nextLine();
+
+            switch (choice){
+                case "1":
+                    monthToDate();
+                    break;
+                case "2":
+                    previousMonth();
+                    break;
+                case "3":
+                    yearToDate();
+                    break;
+                case "4":
+                    previousYear();
+                    break;
+                case "5":
+                    searchByVendor();
+                    break;
+                case "0":
+                    inReports = false;
+                    break;
+                default:
+                    System.out.println("Invalid option. Please try again.");
             }
         }
     }
@@ -182,7 +226,6 @@ public class MainApp {
         }
 
     }
-
     private static ArrayList<Transaction> loadTransactions() {
         ArrayList<Transaction> transactions = new ArrayList<>();
         try {
