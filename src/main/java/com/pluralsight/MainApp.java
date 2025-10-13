@@ -90,17 +90,14 @@ public class MainApp {
             switch (selection) {
 
                 case "A":
-                    //TODO: Create dAE method
                     displayAllEntries();
                     break;
 
                 case "D":
-                    //TODO ; Create dD method
                     displayDeposits();
                     break;
 
                 case "P":
-                    //TODO create dP method
                     displayPayments();
                     break;
 
@@ -117,10 +114,21 @@ public class MainApp {
             }
         }
     }
-    private static void showReportsScreen(){
+
+    // TODO: Implement logic for Ledger Menu
+    private static void displayPayments() {
+    }
+
+    private static void displayDeposits() {
+    }
+
+    private static void displayAllEntries() {
+    }
+
+    private static void showReportsScreen() {
         boolean inReports = true;
 
-        while (inReports){
+        while (inReports) {
 
             System.out.println("""
                     
@@ -138,7 +146,7 @@ public class MainApp {
                     """);
             String choice = keyboard.nextLine();
 
-            switch (choice){
+            switch (choice) {
                 case "1":
                     monthToDate();
                     break;
@@ -161,6 +169,48 @@ public class MainApp {
                     System.out.println("Invalid option. Please try again.");
             }
         }
+    }
+
+    //TODO: Implement logic for Reports Screen
+    private static void searchByVendor() {
+    }
+
+    private static void previousYear() {
+    }
+
+    private static void yearToDate() {
+    }
+
+    private static void previousMonth() {
+    }
+
+    private static void monthToDate() {
+        ArrayList<Transaction> transactions = loadTransactions();
+
+        LocalDate today = LocalDate.now();
+        LocalDate startOfMonth = today.withDayOfMonth(1);
+
+        System.out.println("\n================= + MONTH TO DATE + ===================");
+        System.out.println("From+ " + startOfMonth + " to " + today);
+        System.out.println(" Date       | Time     | Vendor    | Description          |  Amount  ");
+        System.out.println("------------|----------|-----------|----------------------|-----------");
+
+        boolean found = false;
+
+        for (Transaction transaction : transactions) {
+            LocalDate transactionDate = transaction.getDate();
+
+            if (!transactionDate.isBefore(startOfMonth) && !transactionDate.isAfter(today)) {
+                System.out.printf("%-10s | %-8s | %-9s | %-20s | $%8.2f%n", transaction.getDate(), transaction.getTime(),
+                        transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
+
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("No transactions found for this month.");
+        }
+        System.out.println("====================================================\n");
     }
 
     private static void addDeposit() {
@@ -209,6 +259,9 @@ public class MainApp {
 
         System.out.println("Payment successful");
     }
+private static void reportMonthToDate(){
+
+}
 
     private static void saveTransaction(Transaction transaction) {
         try {
@@ -226,6 +279,7 @@ public class MainApp {
         }
 
     }
+
     private static ArrayList<Transaction> loadTransactions() {
         ArrayList<Transaction> transactions = new ArrayList<>();
         try {
