@@ -173,17 +173,44 @@ public class MainApp {
 
     //TODO: Implement logic for Reports Screen
     private static void searchByVendor() {
+        ArrayList<Transaction> transactions = loadTransactions();
     }
 
     private static void previousYear() {
+        ArrayList<Transaction> transactions = loadTransactions();
     }
 
     private static void yearToDate() {
+        ArrayList<Transaction> transactions = loadTransactions();
     }
 
     private static void previousMonth() {
-    }
+        ArrayList<Transaction> transactions = loadTransactions();
 
+        LocalDate oneMonthAgo = LocalDate.now().minusMonths(1);
+        LocalDate startDate = oneMonthAgo.withDayOfMonth(1);
+        LocalDate endDate = oneMonthAgo.withDayOfMonth(oneMonthAgo.lengthOfMonth());
+
+        System.out.println("\n================= + PREVIOUS MONTH + ===================");
+        System.out.println("From " + startDate + " to " + endDate);
+        System.out.println(" Date       | Time     | Vendor    | Description          |  Amount  ");
+        System.out.println("------------|----------|-----------|----------------------|-----------");
+
+        boolean found = false;
+
+        for (Transaction transaction : transactions) {
+            LocalDate transactionsDate = transaction.getDate();
+
+            if (!transactionsDate.isBefore(startDate) && !transactionsDate.isAfter(endDate)) {
+                System.out.printf("%-10s | %-8s | %-9s | %-20s | $%8.2f%n", transaction.getDate(), transaction.getTime(),
+                        transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("No transactions found for the previous month.");
+        }
+    }
     private static void monthToDate() {
         ArrayList<Transaction> transactions = loadTransactions();
 
@@ -259,9 +286,6 @@ public class MainApp {
 
         System.out.println("Payment successful");
     }
-private static void reportMonthToDate(){
-
-}
 
     private static void saveTransaction(Transaction transaction) {
         try {
