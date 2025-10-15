@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="28795a2f-de1f-4820-bd35-004d756a9ce7" name="Changes" comment="Implemented logic for displaying Year To Date report.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pluralsight/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pluralsight/MainApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pluralsight/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pluralsight/Transaction.java" afterDir="false" />
-    </list>
+    <list default="true" id="28795a2f-de1f-4820-bd35-004d756a9ce7" name="Changes" comment="Implemented logic for displaying deposits and entries. Changed signature of transaction object." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -149,7 +145,15 @@
       <option name="project" value="LOCAL" />
       <updated>1760549576897</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Implemented logic for displaying deposits and entries. Changed signature of transaction object.">
+      <option name="closed" value="true" />
+      <created>1760555713341</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1760555713341</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -164,6 +168,7 @@
     <MESSAGE value="Implemented logic for displaying Month to Date report." />
     <MESSAGE value="Implemented logic for displaying Previous Month report." />
     <MESSAGE value="Implemented logic for displaying Year To Date report." />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented logic for displaying Year To Date report." />
+    <MESSAGE value="Implemented logic for displaying deposits and entries. Changed signature of transaction object." />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented logic for displaying deposits and entries. Changed signature of transaction object." />
   </component>
 </project>

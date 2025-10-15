@@ -118,7 +118,25 @@ public class MainApp {
     private static void displayPayments() {
         ArrayList<Transaction> transactions = loadTransactions();
 
+        System.out.println("\n================= + PAYMENTS + ===================");
+        System.out.println(" Date       | Time     | Vendor    | Description          |  Amount  ");
+        System.out.println("------------|----------|-----------|----------------------|-----------");
 
+        boolean found = false;
+
+        for (int i = transactions.size() - 1; i >= 0; i--) {
+            Transaction transaction = transactions.get(i);
+
+            if (transaction.getAmount() < 0) {
+                System.out.printf("%-10s | %-8s | %-9s | %-20s | $%8.2f%n", transaction.getDate(), transaction.getTime(),
+                        transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
+                found = true;
+
+            }
+        }
+        if (!found) {
+            System.out.println("No deposits found.");
+        }
 
     }
 
