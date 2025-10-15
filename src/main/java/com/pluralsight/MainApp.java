@@ -182,6 +182,32 @@ public class MainApp {
 
     private static void yearToDate() {
         ArrayList<Transaction> transactions = loadTransactions();
+
+        int currentYear = LocalDate.now().getYear();
+        LocalDate startDate = LocalDate.of(currentYear, 1, 1);
+        LocalDate endDate = LocalDate.now();
+
+        System.out.println("\n================= + YEAR TO DATE + ===================");
+        System.out.println("From " + startDate + " to " + endDate);
+        System.out.println(" Date       | Time     | Vendor    | Description          |  Amount  ");
+        System.out.println("------------|----------|-----------|----------------------|-----------");
+
+        boolean found = false;
+
+        for (Transaction transaction : transactions) {
+            LocalDate transactionDate = transaction.getDate();
+
+            if (!transactionDate.isBefore(startDate) && !transactionDate.isAfter(endDate)) {
+                System.out.printf("%-10s | %-8s | %-9s | %-20s | $%8.2f%n", transaction.getDate(), transaction.getTime(),
+                        transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
+                found = true;
+
+            }
+        }
+        if (!found) {
+            System.out.println("No transactions found");
+        }
+
     }
 
     private static void previousMonth() {
