@@ -11,7 +11,7 @@ public class Transaction {
     private String vendor;
     private double amount;
 
-    public Transaction(double amount, String vendor, String description, LocalTime time, LocalDate date) {
+    public Transaction(LocalDate date, LocalTime time, String description, String vendor,double amount) {
         this.amount = amount;
         this.vendor = vendor;
         this.description = description;
@@ -39,7 +39,7 @@ public class Transaction {
         return amount;
     }
     public String toCSV(){
-        return date + "|" + time + "|"+ description + "|" + amount;
+        return date + "|" + time.toString().substring(0,8) + "|"+ description + "|" + amount;
     }
     public static Transaction fromCSV(String csvLine) {
         String [] tokens = csvLine.split("\\|");

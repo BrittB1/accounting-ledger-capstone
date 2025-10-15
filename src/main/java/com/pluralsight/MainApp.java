@@ -115,14 +115,55 @@ public class MainApp {
         }
     }
 
-    // TODO: Implement logic for Ledger Menu
     private static void displayPayments() {
+        ArrayList<Transaction> transactions = loadTransactions();
+
+
+
     }
 
     private static void displayDeposits() {
+        ArrayList<Transaction> transactions = loadTransactions();
+
+        System.out.println("\n================= + DEPOSITS + ===================");
+        System.out.println(" Date       | Time     | Vendor    | Description          |  Amount  ");
+        System.out.println("------------|----------|-----------|----------------------|-----------");
+
+        boolean found = false;
+
+        for (int i = transactions.size() - 1; i >= 0; i--) {
+            Transaction transaction = transactions.get(i);
+
+            if (transaction.getAmount() > 0) {
+                System.out.printf("%-10s | %-8s | %-9s | %-20s | $%8.2f%n", transaction.getDate(), transaction.getTime(),
+                        transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
+
+                found = true;
+
+            }
+        }
+        if (!found) {
+            System.out.println("No deposits found.");
+        }
     }
 
     private static void displayAllEntries() {
+        ArrayList<Transaction> transactions = loadTransactions();
+
+        System.out.println("\n================= + ALL ENTRIES + ===================");
+        System.out.println(" Date       | Time     | Vendor    | Description          |  Amount  ");
+        System.out.println("------------|----------|-----------|----------------------|-----------");
+
+        if (transactions.isEmpty()) {
+            System.out.println("No transactions found");
+        }
+
+        for (int i = transactions.size() - 1; i >= 0; i--) {
+            Transaction transaction = transactions.get(i);
+
+            System.out.printf("%-10s | %-8s | %-9s | %-20s | $%8.2f%n", transaction.getDate(), transaction.getTime(),
+                    transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
+        }
     }
 
     private static void showReportsScreen() {
@@ -171,13 +212,61 @@ public class MainApp {
         }
     }
 
-    //TODO: Implement logic for Reports Screen
     private static void searchByVendor() {
         ArrayList<Transaction> transactions = loadTransactions();
+
+        System.out.println("Please enter vendor name: ");
+        String vendorSearch = keyboard.nextLine();
+
+        System.out.println("\n================= + TRANSACTIONS + ===================");
+        System.out.println(" Date       | Time     | Vendor    | Description          |  Amount  ");
+        System.out.println("------------|----------|-----------|----------------------|-----------");
+
+        boolean found = false;
+
+        for (Transaction transaction : transactions) {
+            String vendor = transaction.getVendor();
+
+            if (transaction.getVendor().equalsIgnoreCase(vendorSearch)) {
+                System.out.printf("%-10s | %-8s | %-9s | %-20s | $%8.2f%n", transaction.getDate(), transaction.getTime(),
+                        transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("No transactions found for vendor: " + vendorSearch);
+        }
     }
 
     private static void previousYear() {
         ArrayList<Transaction> transactions = loadTransactions();
+
+        int currentYear = LocalDate.now().getYear();
+        int previousYear = currentYear - 1;
+        LocalDate startDate = LocalDate.of(previousYear, 1, 1);
+        LocalDate endDate = LocalDate.of(previousYear, 12, 31);
+
+        System.out.println("\n================= + PREVIOUS YEAR + ===================");
+        System.out.println("From " + startDate + " to " + endDate);
+        System.out.println(" Date       | Time     | Vendor    | Description          |  Amount  ");
+        System.out.println("------------|----------|-----------|----------------------|-----------");
+
+        boolean found = false;
+
+        for (Transaction transaction : transactions) {
+            LocalDate transactionDate = transaction.getDate();
+
+            if (!transactionDate.isBefore(startDate) && !transactionDate.isAfter(endDate)) {
+                System.out.printf("%-10s | %-8s | %-9s | %-20s | $%8.2f%n", transaction.getDate(), transaction.getTime(),
+                        transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
+                found = true;
+
+            }
+        }
+        if (!found) {
+            System.out.println("No transactions found");
+        }
+
     }
 
     private static void yearToDate() {
@@ -237,6 +326,7 @@ public class MainApp {
             System.out.println("No transactions found for the previous month.");
         }
     }
+
     private static void monthToDate() {
         ArrayList<Transaction> transactions = loadTransactions();
 
@@ -282,7 +372,7 @@ public class MainApp {
         LocalDate date = LocalDate.now();
         LocalTime time = LocalTime.now();
 
-        Transaction transaction = new Transaction(amount, vendor, description, time, date);
+        Transaction transaction = new Transaction(date,time,vendor,description,amount);
 
         saveTransaction(transaction);
 
@@ -293,20 +383,17 @@ public class MainApp {
     private static void makePayment() {
         System.out.println("MAKE PAYMENT");
 
-        System.out.println("Enter vendor: ");
-        String vendor = keyboard.nextLine();
-
         System.out.println("Enter description: ");
         String description = keyboard.nextLine();
+
+        System.out.println("Enter vendor: ");
+        String vendor = keyboard.nextLine();
 
         System.out.println("Enter amount: ");
         double amount = keyboard.nextDouble();
         keyboard.nextLine();
 
-        LocalDate date = LocalDate.now();
-        LocalTime time = LocalTime.now();
-
-        Transaction transaction = new Transaction(-amount, vendor, description, time, date);
+        Transaction transaction = new Transaction(LocalDate.now(),LocalTime.now(),description,vendor,-amount);
 
         saveTransaction(transaction);
 
