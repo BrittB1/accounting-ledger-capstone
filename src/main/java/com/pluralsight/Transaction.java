@@ -3,6 +3,7 @@ package com.pluralsight;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class Transaction {
     private LocalDate date;
@@ -39,7 +40,8 @@ public class Transaction {
         return amount;
     }
     public String toCSV(){
-        return date + "|" + time.toString().substring(0,8) + "|"+ description + "|" + amount;
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        return date + "|" + time.format(timeFormatter) + "|"+ description + "|" + vendor + "|" + amount;
     }
     public static Transaction fromCSV(String csvLine) {
         String [] tokens = csvLine.split("\\|");
@@ -51,7 +53,7 @@ public class Transaction {
         double amount = Double.parseDouble(tokens[4]);
 
 
-        return new Transaction(amount, vendor, description, time, date);
+        return new Transaction(date,time,description,vendor,amount);
     }
 
 

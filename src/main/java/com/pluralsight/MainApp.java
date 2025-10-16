@@ -118,7 +118,7 @@ public class MainApp {
     private static void displayPayments() {
         ArrayList<Transaction> transactions = loadTransactions();
 
-        System.out.println("\n================= + PAYMENTS + ===================");
+        System.out.println("\n========================== + PAYMENTS + ============================");
         System.out.println(" Date       | Time     | Vendor    | Description          |  Amount  ");
         System.out.println("------------|----------|-----------|----------------------|-----------");
 
@@ -390,7 +390,7 @@ public class MainApp {
         LocalDate date = LocalDate.now();
         LocalTime time = LocalTime.now();
 
-        Transaction transaction = new Transaction(date,time,vendor,description,amount);
+        Transaction transaction = new Transaction(date,time,description,vendor,amount);
 
         saveTransaction(transaction);
 
@@ -411,7 +411,13 @@ public class MainApp {
         double amount = keyboard.nextDouble();
         keyboard.nextLine();
 
+        System.out.println("DEBUG - Description: " + description);
+        System.out.println("DEBUG - Vendor: " + vendor);
+        System.out.println("DEBUG - Amount: " + amount);
+
         Transaction transaction = new Transaction(LocalDate.now(),LocalTime.now(),description,vendor,-amount);
+
+        System.out.println("DEBUG - CSV line: " + transaction.toCSV());
 
         saveTransaction(transaction);
 
@@ -419,34 +425,28 @@ public class MainApp {
     }
 
     private static void saveTransaction(Transaction transaction) {
-        try {
-            BufferedWriter bufWriter = new BufferedWriter(new FileWriter("transactions.csv", true));
-
+        try (BufferedWriter bufWriter = new BufferedWriter(new FileWriter("transactions.csv", true))) {
             bufWriter.write(transaction.toCSV());
-
             bufWriter.newLine();
-
-            bufWriter.close();
-
-
+            System.out.println("DEBUG - Write successful!");
         } catch (IOException e) {
             System.out.println("Error saving transaction" + e.getMessage());
+            e.printStackTrace();
         }
-
     }
 
     private static ArrayList<Transaction> loadTransactions() {
         ArrayList<Transaction> transactions = new ArrayList<>();
         try {
             BufferedReader bufReader = new BufferedReader(new FileReader("transactions.csv"));
-
             String line;
             while ((line = bufReader.readLine()) != null) {
+                if (line.trim().isEmpty()){
+                    continue;
+                }
                 Transaction transaction = Transaction.fromCSV(line);
                 transactions.add(transaction);
             }
-            bufReader.close();
-
         } catch (Exception e) {
             System.out.println("Error loading transactions" + e.getMessage());
         }
