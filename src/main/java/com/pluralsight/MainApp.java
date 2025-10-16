@@ -437,8 +437,7 @@ public class MainApp {
 
     private static ArrayList<Transaction> loadTransactions() {
         ArrayList<Transaction> transactions = new ArrayList<>();
-        try {
-            BufferedReader bufReader = new BufferedReader(new FileReader("transactions.csv"));
+        try (BufferedReader bufReader = new BufferedReader(new FileReader("transactions.csv"))) {
             String line;
             while ((line = bufReader.readLine()) != null) {
                 if (line.trim().isEmpty()){
