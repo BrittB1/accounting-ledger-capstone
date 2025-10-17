@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="28795a2f-de1f-4820-bd35-004d756a9ce7" name="Changes" comment="Converted loadTransactions from standard try block to try-with-resources">
+    <list default="true" id="28795a2f-de1f-4820-bd35-004d756a9ce7" name="Changes" comment="Changed time variable in toCSV method to time.toString for formatting">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/pluralsight/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pluralsight/MainApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pluralsight/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pluralsight/Transaction.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,19 +44,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.MainApp.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.MainApp.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\comat\pluralsight\capstones\AccountingLedger\src" />
@@ -188,7 +187,15 @@
       <option name="project" value="LOCAL" />
       <updated>1760637843383</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Changed time variable in toCSV method to time.toString for formatting">
+      <option name="closed" value="true" />
+      <created>1760662239649</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1760662239649</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -207,6 +214,7 @@
     <MESSAGE value="Implemented logic for displaying payments." />
     <MESSAGE value="Fixed try-catch in saveTransactions that caused a blank csv to be created and transactions not able to be viewed." />
     <MESSAGE value="Converted loadTransactions from standard try block to try-with-resources" />
-    <option name="LAST_COMMIT_MESSAGE" value="Converted loadTransactions from standard try block to try-with-resources" />
+    <MESSAGE value="Changed time variable in toCSV method to time.toString for formatting" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed time variable in toCSV method to time.toString for formatting" />
   </component>
 </project>

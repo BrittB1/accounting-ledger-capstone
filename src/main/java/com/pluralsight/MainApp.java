@@ -14,10 +14,6 @@ public class MainApp {
         keyboard = new Scanner(System.in);
         boolean running = true;
 
-
-        System.out.println("Welcome!");
-
-
         while (running) {
             running = showHomeScreen();
         }
@@ -26,16 +22,16 @@ public class MainApp {
     private static boolean showHomeScreen() {
 
         System.out.println("""
-                
-                                ==================================
-                                          HOME MENU\s
-                                ==================================
-                                Choose an option by letter:
-                               \s
-                                D. Add Deposit\s
-                                P. Make Payment
-                                L. Ledger
-                                X. Exit \
+                ╔════════════════════════════════════╗
+                ║         🏠 HOME MENU               ║
+                ╠════════════════════════════════════╣
+                ║  Choose an option by letter:       ║
+                ║                                    ║
+                ║  D. 💵 Add Deposit                 ║
+                ║  P. 💳 Make Payment                ║
+                ║  L. 📊 Ledger                      ║
+                ║  X. 🚪 Exit                         ║
+                ╚════════════════════════════════════╝
                 """);
 
         String choice = keyboard.nextLine().trim().toUpperCase();
@@ -56,10 +52,10 @@ public class MainApp {
                 break;
 
             case "X":
-                System.out.println("Thank you for using the accounting ledger. Come again soon");
+                System.out.println("\uD83D\uDC4B Thank you for using the accounting ledger. Come again soon");
                 return false;
             default:
-                System.out.println("Sorry, invalid choice. Please try again.");
+                System.out.println("❌ Sorry, invalid choice. Please try again.");
 
 
         }
@@ -72,17 +68,17 @@ public class MainApp {
         while (inLedger) {
 
             System.out.println("""
-                    
-                                    ==================================
-                                              LEDGER MENU\s
-                                    ==================================
-                                    Choose an option by letter:
-                                   \s
-                                    A. All\s
-                                    D. Deposits
-                                    P. Payments
-                                    R. Reports \s
-                                    H. Home
+                    ╔════════════════════════════════════╗
+                    ║         📊 LEDGER MENU             ║
+                    ╠════════════════════════════════════╣
+                    ║  Choose an option by letter:       ║
+                    ║                                    ║
+                    ║  A. 📋 All                         ║
+                    ║  D. 💰 Deposits                    ║
+                    ║  P. 💸 Payments                    ║
+                    ║  R. 📈 Reports                     ║
+                    ║  H. 🏠 Home                        ║
+                    ╚════════════════════════════════════╝
                     """);
 
             String selection = keyboard.nextLine().trim().toUpperCase();
@@ -109,7 +105,7 @@ public class MainApp {
                     inLedger = false;
                     break;
                 default:
-                    System.out.println("Sorry invalid option. Please try again");
+                    System.out.println("❌ Sorry invalid option. Please try again");
 
             }
         }
@@ -118,9 +114,9 @@ public class MainApp {
     private static void displayPayments() {
         ArrayList<Transaction> transactions = loadTransactions();
 
-        System.out.println("\n========================== + PAYMENTS + ============================");
-        System.out.println(" Date       | Time     | Vendor    | Description          |  Amount  ");
-        System.out.println("------------|----------|-----------|----------------------|-----------");
+        System.out.println("\n╔═══════════════════════════ 💸 PAYMENTS    ═══════════════════════════╗");
+        System.out.println("║ Date       │ Time     │ Vendor      │ Description          │  Amount   ║");
+        System.out.println("╠════════════╪══════════╪═════════════╪══════════════════════╪═══════════╣");
 
         boolean found = false;
 
@@ -135,7 +131,7 @@ public class MainApp {
             }
         }
         if (!found) {
-            System.out.println("No payments found.");
+            System.out.println("\uD83D\uDCED No payments found.");
         }
 
     }
@@ -143,9 +139,9 @@ public class MainApp {
     private static void displayDeposits() {
         ArrayList<Transaction> transactions = loadTransactions();
 
-        System.out.println("\n================= + DEPOSITS + ===================");
-        System.out.println(" Date       | Time     | Vendor    | Description          |  Amount  ");
-        System.out.println("------------|----------|-----------|----------------------|-----------");
+        System.out.println("\n╔═══════════════════════════ 💰 DEPOSITS 💰 ═══════════════════════════╗");
+        System.out.println("║ Date       │ Time     │ Vendor      │ Description          │  Amount   ║");
+        System.out.println("╠════════════╪══════════╪═════════════╪══════════════════════╪═══════════╣");
 
         boolean found = false;
 
@@ -161,16 +157,16 @@ public class MainApp {
             }
         }
         if (!found) {
-            System.out.println("No deposits found.");
+            System.out.println("\uD83D\uDCED No deposits found.");
         }
     }
 
     private static void displayAllEntries() {
         ArrayList<Transaction> transactions = loadTransactions();
 
-        System.out.println("\n================= + ALL ENTRIES + ===================");
-        System.out.println(" Date       | Time     | Vendor    | Description          |  Amount  ");
-        System.out.println("------------|----------|-----------|----------------------|-----------");
+        System.out.println("\n╔═══════════════════════════ 📋 ALL ENTRIES 📋 ════════════════════════╗");
+        System.out.println("║ Date       │ Time     │ Vendor      │ Description          │  Amount   ║");
+        System.out.println("╠════════════╪══════════╪═════════════╪══════════════════════╪═══════════╣");
 
         if (transactions.isEmpty()) {
             System.out.println("No transactions found");
@@ -182,6 +178,7 @@ public class MainApp {
             System.out.printf("%-10s | %-8s | %-9s | %-20s | $%8.2f%n", transaction.getDate(), transaction.getTime(),
                     transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
         }
+        System.out.println("╚════════════════════════════════════════════════════════════════════════╝\n");
     }
 
     private static void showReportsScreen() {
@@ -190,18 +187,18 @@ public class MainApp {
         while (inReports) {
 
             System.out.println("""
-                    
-                                    ==================================
-                                              REPORTS MENU\s
-                                    ==================================
-                                    Choose an option by letter:
-                                   \s
-                                    1). Month to Date\s
-                                    2). Previous Month
-                                    3). Year To Date
-                                    4). Previous Year\s
-                                    5). Search By Vendor
-                                    0). Back
+                     ╔════════════════════════════════════╗
+                     ║        📈 REPORTS MENU             ║
+                     ╠════════════════════════════════════╣
+                     ║  Choose an option by number:       ║
+                     ║                                     ║
+                     ║  1. 📅 Month to Date                ║
+                     ║  2. ⏮️  Previous Month              ║
+                     ║  3. 📆 Year To Date                 ║
+                     ║  4. ⏮️  Previous Year               ║
+                     ║  5. 🔍 Search By Vendor             ║
+                     ║  0. 👈  Back                        ║
+                     ╚════════════════════════════════════╝
                     """);
             String choice = keyboard.nextLine();
 
@@ -225,7 +222,7 @@ public class MainApp {
                     inReports = false;
                     break;
                 default:
-                    System.out.println("Invalid option. Please try again.");
+                    System.out.println("❌ Invalid option. Please try again.");
             }
         }
     }
@@ -233,12 +230,12 @@ public class MainApp {
     private static void searchByVendor() {
         ArrayList<Transaction> transactions = loadTransactions();
 
-        System.out.println("Please enter vendor name: ");
+        System.out.println("\uD83D\uDD0D Please enter vendor name: ");
         String vendorSearch = keyboard.nextLine();
 
-        System.out.println("\n================= + TRANSACTIONS + =================================");
-        System.out.println(" Date       | Time     | Vendor    | Description          |  Amount  ");
-        System.out.println("------------|----------|-----------|----------------------|-----------");
+        System.out.println("\n╔════════════════════════ 🔍 VENDOR SEARCH    ═════════════════════════╗");
+        System.out.println("║ Date       │ Time     │ Vendor      │ Description          │  Amount   ║");
+        System.out.println("╠════════════╪══════════╪═════════════╪══════════════════════╪═══════════╣");
 
         boolean found = false;
 
@@ -246,13 +243,13 @@ public class MainApp {
             String vendor = transaction.getVendor();
 
             if (transaction.getVendor().equalsIgnoreCase(vendorSearch)) {
-                System.out.printf("%-10s | %-8s | %-9s | %-20s | $%8.2f%n", transaction.getDate(), transaction.getTime(),
+                System.out.printf("║ %-10s | %-8s | %-9s | %-20s | $%8.2f%n ║", transaction.getDate(), transaction.getTime(),
                         transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
                 found = true;
             }
         }
         if (!found) {
-            System.out.println("No transactions found for vendor: " + vendorSearch);
+            System.out.println("\uD83D\uDCED No transactions found for vendor: " + vendorSearch);
         }
     }
 
@@ -264,10 +261,11 @@ public class MainApp {
         LocalDate endDate = today.minusYears(1).withDayOfYear(today.minusYears(1).lengthOfYear());
 
 
-        System.out.println("\n============================ + PREVIOUS YEAR + ===================");
-        System.out.println("From " + startDate + " to " + endDate);
-        System.out.println(" Date       | Time     | Vendor    | Description          |  Amount  ");
-        System.out.println("------------|----------|-----------|----------------------|-----------");
+        System.out.println("\n╔══════════════════════ ⏮️  PREVIOUS YEAR     ═════════════════════════╗");
+        System.out.println("║ 📅 From " + startDate + " to " + endDate + "                           ║");
+        System.out.println("╠════════════╤══════════╤═════════════╤══════════════════════╤═══════════╣");
+        System.out.println("║ Date       │ Time     │ Vendor      │ Description          │  Amount   ║");
+        System.out.println("╠════════════╪══════════╪═════════════╪══════════════════════╪═══════════╣");
 
         boolean found = false;
 
@@ -282,7 +280,7 @@ public class MainApp {
             }
         }
         if (!found) {
-            System.out.println("No transactions found");
+            System.out.println(" \uD83D\uDCED No transactions found");
         }
 
     }
@@ -293,10 +291,11 @@ public class MainApp {
         LocalDate today = LocalDate.now();
         LocalDate startDate = today.withDayOfYear(1);
 
-        System.out.println("\n====================== + YEAR TO DATE + ===========================");
-        System.out.println("From " + startDate + " to " + today);
-        System.out.println(" Date       | Time     | Vendor    | Description          |  Amount  ");
-        System.out.println("------------|----------|-----------|----------------------|-----------");
+        System.out.println("\n╔══════════════════════  📅 YEAR TO DATE   ════════════════════════════╗");
+        System.out.println("║ 📅 From " + startDate + " to " + today + "                             ║");
+        System.out.println("╠════════════╤══════════╤═════════════╤══════════════════════╤═══════════╣");
+        System.out.println("║ Date       │ Time     │ Vendor      │ Description          │  Amount   ║");
+        System.out.println("╠════════════╪══════════╪═════════════╪══════════════════════╪═══════════╣");
 
         boolean found = false;
 
@@ -304,14 +303,14 @@ public class MainApp {
             LocalDate transactionDate = transaction.getDate();
 
             if (!transactionDate.isBefore(startDate) && !transactionDate.isAfter(today)) {
-                System.out.printf("%-10s | %-8s | %-9s | %-20s | $%8.2f%n", transaction.getDate(), transaction.getTime(),
+                System.out.printf("║ %-10s | %-8s | %-9s | %-20s | $%8.2f%n ║", transaction.getDate(), transaction.getTime(),
                         transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
                 found = true;
 
             }
         }
         if (!found) {
-            System.out.println("No transactions found");
+            System.out.println("\uD83D\uDCED No transactions found");
         }
 
     }
@@ -323,10 +322,11 @@ public class MainApp {
         LocalDate startDate = oneMonthAgo.withDayOfMonth(1);
         LocalDate endDate = oneMonthAgo.withDayOfMonth(oneMonthAgo.lengthOfMonth());
 
-        System.out.println("\n================= + PREVIOUS MONTH + ===================");
-        System.out.println("From " + startDate + " to " + endDate);
-        System.out.println(" Date       | Time     | Vendor    | Description          |  Amount  ");
-        System.out.println("------------|----------|-----------|----------------------|-----------");
+        System.out.println("\n╔══════════════════════ ⏮️  PREVIOUS MONTH    ═════════════════════════╗");
+        System.out.println("║ 📅 From " + startDate + " to " + endDate + "                           ║");
+        System.out.println("╠════════════╤══════════╤═════════════╤══════════════════════╤═══════════╣");
+        System.out.println("║ Date       │ Time     │ Vendor      │ Description          │  Amount   ║");
+        System.out.println("╠════════════╪══════════╪═════════════╪══════════════════════╪═══════════╣");
 
         boolean found = false;
 
@@ -334,13 +334,13 @@ public class MainApp {
             LocalDate transactionsDate = transaction.getDate();
 
             if (!transactionsDate.isBefore(startDate) && !transactionsDate.isAfter(endDate)) {
-                System.out.printf("%-10s | %-8s | %-9s | %-20s | $%8.2f%n", transaction.getDate(), transaction.getTime(),
+                System.out.printf("║ %-10s | %-8s | %-9s | %-20s | $%8.2f%n ║", transaction.getDate(), transaction.getTime(),
                         transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
                 found = true;
             }
         }
         if (!found) {
-            System.out.println("No transactions found for the previous month.");
+            System.out.println("\uD83D\uDCED No transactions found for the previous month.");
         }
     }
 
@@ -350,10 +350,11 @@ public class MainApp {
         LocalDate today = LocalDate.now();
         LocalDate startOfMonth = today.withDayOfMonth(1);
 
-        System.out.println("\n================= + MONTH TO DATE + ===================");
-        System.out.println("From " + startOfMonth + " to " + today);
-        System.out.println(" Date       | Time     | Vendor    | Description          |  Amount  ");
-        System.out.println("------------|----------|-----------|----------------------|-----------");
+        System.out.println("\n╔══════════════════════  📅 MONTH TO DATE     ═════════════════════════╗");
+        System.out.println("║ 📅 From " + startOfMonth + " to " + today + "                          ║");
+        System.out.println("╠════════════╤══════════╤═════════════╤══════════════════════╤═══════════╣");
+        System.out.println("║ Date       │ Time     │ Vendor      │ Description          │  Amount   ║");
+        System.out.println("╠════════════╪══════════╪═════════════╪══════════════════════╪═══════════╣");
 
         boolean found = false;
 
@@ -368,53 +369,52 @@ public class MainApp {
             }
         }
         if (!found) {
-            System.out.println("No transactions found for this month.");
+            System.out.println("\uD83D\uDCED No transactions found for this month.");
         }
         System.out.println("====================================================\n");
     }
 
     private static void addDeposit() {
-        System.out.println("ADD DEPOSIT");
+        System.out.println("\n💵 ===== ADD DEPOSIT ===== 💵");
 
-        System.out.print("Enter description: ");
+        System.out.print("📝 Enter description: ");
         String description = keyboard.nextLine();
 
-        System.out.print("Enter vendor: ");
+        System.out.print("🏪 Enter vendor: ");
         String vendor = keyboard.nextLine();
 
-        System.out.print("Enter amount: ");
+        System.out.print("💰 Enter amount: $");
         double amount = keyboard.nextDouble();
         keyboard.nextLine();
 
         LocalDate date = LocalDate.now();
         LocalTime time = LocalTime.now();
 
-        Transaction transaction = new Transaction(date,time,description,vendor,amount);
+        Transaction transaction = new Transaction(date, time, description, vendor, amount);
 
         saveTransaction(transaction);
 
-        System.out.println("Deposit Successful");
-
+        System.out.println("✅ Deposit Successful! 🎉\n");
     }
 
     private static void makePayment() {
-        System.out.println("MAKE PAYMENT");
+        System.out.println("\n💳 ===== MAKE PAYMENT ===== 💳");
 
-        System.out.println("Enter description: ");
+        System.out.print(" 📝 Enter description: ");
         String description = keyboard.nextLine();
 
-        System.out.println("Enter vendor: ");
+        System.out.print("🏪 Enter vendor: ");
         String vendor = keyboard.nextLine();
 
-        System.out.println("Enter amount: ");
+        System.out.print("💸 Enter amount: $");
         double amount = keyboard.nextDouble();
         keyboard.nextLine();
 
-        Transaction transaction = new Transaction(LocalDate.now(),LocalTime.now(),description,vendor,-amount);
+        Transaction transaction = new Transaction(LocalDate.now(), LocalTime.now(), description, vendor, -amount);
 
         saveTransaction(transaction);
 
-        System.out.println("Payment successful");
+        System.out.println("✅ Payment successful! 💸\n");
     }
 
     private static void saveTransaction(Transaction transaction) {
@@ -422,23 +422,24 @@ public class MainApp {
             bufWriter.write(transaction.toCSV());
             bufWriter.newLine();
         } catch (IOException e) {
-            System.out.println("Error saving transaction" + e.getMessage());
+            System.out.println("❌ Error saving transaction" + e.getMessage());
             e.printStackTrace();
         }
     }
+
     private static ArrayList<Transaction> loadTransactions() {
         ArrayList<Transaction> transactions = new ArrayList<>();
         try (BufferedReader bufReader = new BufferedReader(new FileReader("transactions.csv"))) {
             String line;
             while ((line = bufReader.readLine()) != null) {
-                if (line.trim().isEmpty()){
+                if (line.trim().isEmpty()) {
                     continue;
                 }
                 Transaction transaction = Transaction.fromCSV(line);
                 transactions.add(transaction);
             }
         } catch (Exception e) {
-            System.out.println("Error loading transactions" + e.getMessage());
+            System.out.println("⚠️Error loading transactions" + e.getMessage());
         }
 
         return transactions;
