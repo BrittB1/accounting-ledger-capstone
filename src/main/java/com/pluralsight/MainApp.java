@@ -135,7 +135,7 @@ public class MainApp {
             }
         }
         if (!found) {
-            System.out.println("No deposits found.");
+            System.out.println("No payments found.");
         }
 
     }
@@ -236,7 +236,7 @@ public class MainApp {
         System.out.println("Please enter vendor name: ");
         String vendorSearch = keyboard.nextLine();
 
-        System.out.println("\n================= + TRANSACTIONS + ===================");
+        System.out.println("\n================= + TRANSACTIONS + =================================");
         System.out.println(" Date       | Time     | Vendor    | Description          |  Amount  ");
         System.out.println("------------|----------|-----------|----------------------|-----------");
 
@@ -259,12 +259,12 @@ public class MainApp {
     private static void previousYear() {
         ArrayList<Transaction> transactions = loadTransactions();
 
-        int currentYear = LocalDate.now().getYear();
-        int previousYear = currentYear - 1;
-        LocalDate startDate = LocalDate.of(previousYear, 1, 1);
-        LocalDate endDate = LocalDate.of(previousYear, 12, 31);
+        LocalDate today = LocalDate.now();
+        LocalDate startDate = today.minusYears(1).withDayOfYear(1);
+        LocalDate endDate = today.minusYears(1).withDayOfYear(today.minusYears(1).lengthOfYear());
 
-        System.out.println("\n================= + PREVIOUS YEAR + ===================");
+
+        System.out.println("\n============================ + PREVIOUS YEAR + ===================");
         System.out.println("From " + startDate + " to " + endDate);
         System.out.println(" Date       | Time     | Vendor    | Description          |  Amount  ");
         System.out.println("------------|----------|-----------|----------------------|-----------");
@@ -290,12 +290,11 @@ public class MainApp {
     private static void yearToDate() {
         ArrayList<Transaction> transactions = loadTransactions();
 
-        int currentYear = LocalDate.now().getYear();
-        LocalDate startDate = LocalDate.of(currentYear, 1, 1);
-        LocalDate endDate = LocalDate.now();
+        LocalDate today = LocalDate.now();
+        LocalDate startDate = today.withDayOfYear(1);
 
-        System.out.println("\n================= + YEAR TO DATE + ===================");
-        System.out.println("From " + startDate + " to " + endDate);
+        System.out.println("\n====================== + YEAR TO DATE + ===========================");
+        System.out.println("From " + startDate + " to " + today);
         System.out.println(" Date       | Time     | Vendor    | Description          |  Amount  ");
         System.out.println("------------|----------|-----------|----------------------|-----------");
 
@@ -304,7 +303,7 @@ public class MainApp {
         for (Transaction transaction : transactions) {
             LocalDate transactionDate = transaction.getDate();
 
-            if (!transactionDate.isBefore(startDate) && !transactionDate.isAfter(endDate)) {
+            if (!transactionDate.isBefore(startDate) && !transactionDate.isAfter(today)) {
                 System.out.printf("%-10s | %-8s | %-9s | %-20s | $%8.2f%n", transaction.getDate(), transaction.getTime(),
                         transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
                 found = true;
@@ -352,7 +351,7 @@ public class MainApp {
         LocalDate startOfMonth = today.withDayOfMonth(1);
 
         System.out.println("\n================= + MONTH TO DATE + ===================");
-        System.out.println("From+ " + startOfMonth + " to " + today);
+        System.out.println("From " + startOfMonth + " to " + today);
         System.out.println(" Date       | Time     | Vendor    | Description          |  Amount  ");
         System.out.println("------------|----------|-----------|----------------------|-----------");
 
@@ -411,13 +410,7 @@ public class MainApp {
         double amount = keyboard.nextDouble();
         keyboard.nextLine();
 
-        System.out.println("DEBUG - Description: " + description);
-        System.out.println("DEBUG - Vendor: " + vendor);
-        System.out.println("DEBUG - Amount: " + amount);
-
         Transaction transaction = new Transaction(LocalDate.now(),LocalTime.now(),description,vendor,-amount);
-
-        System.out.println("DEBUG - CSV line: " + transaction.toCSV());
 
         saveTransaction(transaction);
 
@@ -428,13 +421,11 @@ public class MainApp {
         try (BufferedWriter bufWriter = new BufferedWriter(new FileWriter("transactions.csv", true))) {
             bufWriter.write(transaction.toCSV());
             bufWriter.newLine();
-            System.out.println("DEBUG - Write successful!");
         } catch (IOException e) {
             System.out.println("Error saving transaction" + e.getMessage());
             e.printStackTrace();
         }
     }
-
     private static ArrayList<Transaction> loadTransactions() {
         ArrayList<Transaction> transactions = new ArrayList<>();
         try (BufferedReader bufReader = new BufferedReader(new FileReader("transactions.csv"))) {
